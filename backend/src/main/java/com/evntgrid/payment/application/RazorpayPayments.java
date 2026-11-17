@@ -91,7 +91,8 @@ public class RazorpayPayments implements Payments {
         String orderId = entity == null ? null : (String) entity.get("order_id");
         Optional<Stored> payment = orderId == null ? Optional.empty() : find(orderId);
         String outcome = "IGNORED";
-        if (payment.isPresent()) {
+        // A payment is only found through the entity's order id, so the entity exists here; checking it keeps that visible.
+        if (entity != null && payment.isPresent()) {
             switch (type) {
                 case "payment.captured", "order.paid" -> {
                     capture(payment.get(), (String) entity.get("id"));
