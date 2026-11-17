@@ -1,0 +1,1540 @@
+{
+  "components": {
+    "schemas": {
+      "ApiFieldError": {
+        "description": "Present on VALIDATION_FAILED",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApiProblem": {
+        "description": "Problem Details (RFC 9457) with a stable `code` and the request's `correlationId`.",
+        "properties": {
+          "code": {
+            "description": "Stable error code, for example NOT_FOUND, VALIDATION_FAILED, REQUEST_MALFORMED",
+            "example": "NOT_FOUND",
+            "type": "string"
+          },
+          "correlationId": {
+            "description": "Same value as the X-Correlation-Id response header",
+            "type": "string"
+          },
+          "detail": {
+            "example": "No event category exists with this identifier.",
+            "type": "string"
+          },
+          "fieldErrors": {
+            "description": "Present on VALIDATION_FAILED",
+            "items": {
+              "$ref": "#/components/schemas/ApiFieldError"
+            },
+            "type": "array"
+          },
+          "instance": {
+            "type": "string"
+          },
+          "status": {
+            "example": 404,
+            "format": "int32",
+            "type": "integer"
+          },
+          "title": {
+            "example": "Not found",
+            "type": "string"
+          },
+          "type": {
+            "example": "about:blank",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CatalogueEntry": {
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "example": "Micro-Weddings",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object"
+      },
+      "CategoryDetail": {
+        "properties": {
+          "eventTypes": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogueEntry"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "services": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryService"
+            },
+            "type": "array"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "subcategories": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogueEntry"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "eventTypes",
+          "name",
+          "services",
+          "slug",
+          "subcategories"
+        ],
+        "type": "object"
+      },
+      "CategoryList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CategorySummary"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "type": "object"
+      },
+      "CategoryService": {
+        "properties": {
+          "attributes": {
+            "description": "Properties with no values listed in the source, such as Cost or Type (D-11)",
+            "items": {
+              "description": "Properties with no values listed in the source, such as Cost or Type (D-11)",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "example": "Wearables [Rental]",
+            "type": "string"
+          },
+          "optional": {
+            "type": "boolean"
+          },
+          "options": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "rental": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attributes",
+          "code",
+          "name",
+          "optional",
+          "options",
+          "rental"
+        ],
+        "type": "object"
+      },
+      "CategorySummary": {
+        "properties": {
+          "name": {
+            "example": "Weddings and Reception",
+            "type": "string"
+          },
+          "slug": {
+            "example": "weddings-and-reception",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "slug"
+        ],
+        "type": "object"
+      },
+      "CommissionRate": {
+        "properties": {
+          "rateBps": {
+            "description": "Basis points: 500 means 5%",
+            "format": "int32",
+            "type": "integer"
+          },
+          "ratePercent": {
+            "description": "The same rate as a percentage, for example 5.00",
+            "type": "number"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rateBps",
+          "ratePercent",
+          "updatedAt"
+        ],
+        "type": "object"
+      },
+      "CsrfToken": {
+        "properties": {
+          "headerName": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "headerName",
+          "token"
+        ],
+        "type": "object"
+      },
+      "CurrentSession": {
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/SignedInAccount"
+          },
+          "signedIn": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "signedIn"
+        ],
+        "type": "object"
+      },
+      "ListingCard": {
+        "properties": {
+          "categoryName": {
+            "type": "string"
+          },
+          "categorySlug": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "demo": {
+            "type": "boolean"
+          },
+          "fromPriceMinor": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "fromPriceUnit": {
+            "type": "string"
+          },
+          "notAllowedAtVenue": {
+            "description": "True when the venue in the `venue` filter does not allow this service (SR-1, SR-2)",
+            "type": "boolean"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRef"
+          },
+          "servesNonVeg": {
+            "type": "boolean"
+          },
+          "servesVeg": {
+            "type": "boolean"
+          },
+          "serviceCode": {
+            "type": "string"
+          },
+          "serviceName": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "venueSlug": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "categoryName",
+          "categorySlug",
+          "city",
+          "demo",
+          "notAllowedAtVenue",
+          "provider",
+          "serviceCode",
+          "serviceName",
+          "slug",
+          "title"
+        ],
+        "type": "object"
+      },
+      "ListingPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ListingCard"
+            },
+            "type": "array"
+          },
+          "page": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "total": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "venueNotice": {
+            "$ref": "#/components/schemas/VenueNotice"
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "size",
+          "total"
+        ],
+        "type": "object"
+      },
+      "ListingWithPackages": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "listing": {
+            "$ref": "#/components/schemas/ListingCard"
+          },
+          "packages": {
+            "items": {
+              "$ref": "#/components/schemas/Package"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "listing",
+          "packages"
+        ],
+        "type": "object"
+      },
+      "Location": {
+        "properties": {
+          "city": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "city"
+        ],
+        "type": "object"
+      },
+      "Package": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inclusions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "maxQuantity": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "minQuantity": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "priceMinor": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "priceUnit": {
+            "description": "FIXED (per event) or PER_GUEST (per guest, for example per plate)",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "inclusions",
+          "maxQuantity",
+          "minQuantity",
+          "priceMinor",
+          "priceUnit",
+          "title"
+        ],
+        "type": "object"
+      },
+      "ProviderDetail": {
+        "properties": {
+          "about": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "demo": {
+            "type": "boolean"
+          },
+          "listings": {
+            "items": {
+              "$ref": "#/components/schemas/ListingWithPackages"
+            },
+            "type": "array"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRef"
+          },
+          "venues": {
+            "items": {
+              "$ref": "#/components/schemas/VenueCard"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "city",
+          "demo",
+          "listings",
+          "provider",
+          "venues"
+        ],
+        "type": "object"
+      },
+      "ProviderRef": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "type": {
+            "description": "INDIVIDUAL or COMPANY",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "slug",
+          "type"
+        ],
+        "type": "object"
+      },
+      "SearchResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SearchResultItem"
+            },
+            "type": "array"
+          },
+          "query": {
+            "type": "string"
+          },
+          "total": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "words": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "items",
+          "query",
+          "total",
+          "words"
+        ],
+        "type": "object"
+      },
+      "SearchResultItem": {
+        "properties": {
+          "categoryName": {
+            "type": "string"
+          },
+          "categorySlug": {
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "CATEGORY",
+              "EVENT_TYPE",
+              "SUBCATEGORY",
+              "SERVICE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "categoryName",
+          "categorySlug",
+          "options",
+          "title",
+          "type"
+        ],
+        "type": "object"
+      },
+      "SignInCode": {
+        "properties": {
+          "challengeId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "channel": {
+            "enum": [
+              "PHONE",
+              "EMAIL"
+            ],
+            "type": "string"
+          },
+          "devCode": {
+            "description": "Development mode only: the code itself, to show on screen",
+            "type": "string"
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "resendAfterSeconds": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "sentTo": {
+            "description": "Masked destination for display",
+            "type": "string"
+          }
+        },
+        "required": [
+          "challengeId",
+          "channel",
+          "expiresAt",
+          "resendAfterSeconds",
+          "sentTo"
+        ],
+        "type": "object"
+      },
+      "SignInCodeRequest": {
+        "properties": {
+          "channel": {
+            "enum": [
+              "PHONE",
+              "EMAIL"
+            ],
+            "type": "string"
+          },
+          "destination": {
+            "description": "10-digit Indian mobile number or email address",
+            "example": "9876543210",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "destination"
+        ],
+        "type": "object"
+      },
+      "SignInOptions": {
+        "properties": {
+          "devMode": {
+            "type": "boolean"
+          },
+          "emailAvailable": {
+            "type": "boolean"
+          },
+          "phoneAvailable": {
+            "type": "boolean"
+          },
+          "testCode": {
+            "description": "Development mode only: fixed code for testPhone",
+            "type": "string"
+          },
+          "testPhone": {
+            "description": "Development mode only: dummy 10-digit mobile number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "devMode",
+          "emailAvailable",
+          "phoneAvailable"
+        ],
+        "type": "object"
+      },
+      "SignInRequest": {
+        "properties": {
+          "challengeId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "challengeId",
+          "code"
+        ],
+        "type": "object"
+      },
+      "SignedInAccount": {
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "description": "E.164, for example +919876543210",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId"
+        ],
+        "type": "object"
+      },
+      "VenueCard": {
+        "properties": {
+          "area": {
+            "type": "string"
+          },
+          "capacityMax": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "capacityMin": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "city": {
+            "type": "string"
+          },
+          "demo": {
+            "type": "boolean"
+          },
+          "fromPriceMinor": {
+            "description": "Lowest package price in paise",
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRef"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "venueType": {
+            "$ref": "#/components/schemas/VenueType"
+          }
+        },
+        "required": [
+          "city",
+          "demo",
+          "name",
+          "provider",
+          "slug",
+          "venueType"
+        ],
+        "type": "object"
+      },
+      "VenueDetail": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "listings": {
+            "items": {
+              "$ref": "#/components/schemas/ListingWithPackages"
+            },
+            "type": "array"
+          },
+          "services": {
+            "items": {
+              "$ref": "#/components/schemas/VenueServiceStatus"
+            },
+            "type": "array"
+          },
+          "suitableFor": {
+            "description": "Event categories this venue is listed under",
+            "items": {
+              "description": "Event categories this venue is listed under",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "venue": {
+            "$ref": "#/components/schemas/VenueCard"
+          }
+        },
+        "required": [
+          "description",
+          "listings",
+          "services",
+          "suitableFor",
+          "venue"
+        ],
+        "type": "object"
+      },
+      "VenueNotice": {
+        "properties": {
+          "notAllowed": {
+            "items": {
+              "$ref": "#/components/schemas/VenueServiceStatus"
+            },
+            "type": "array"
+          },
+          "venueName": {
+            "type": "string"
+          },
+          "venueSlug": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notAllowed",
+          "venueName",
+          "venueSlug"
+        ],
+        "type": "object"
+      },
+      "VenuePage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/VenueCard"
+            },
+            "type": "array"
+          },
+          "page": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "total": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "size",
+          "total"
+        ],
+        "type": "object"
+      },
+      "VenueServiceStatus": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "serviceCode": {
+            "type": "string"
+          },
+          "serviceName": {
+            "type": "string"
+          },
+          "status": {
+            "description": "NOT_ALLOWED, PROVIDED or ALLOWED",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "serviceCode",
+          "serviceName",
+          "status"
+        ],
+        "type": "object"
+      },
+      "VenueType": {
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Errors use Problem Details (RFC 9457) with `code` and `correlationId`. Every response carries `X-Correlation-Id`.",
+    "title": "EVNTGRID API",
+    "version": "v1"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/api/public/v1/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryList"
+                }
+              }
+            },
+            "description": "All active categories"
+          }
+        },
+        "summary": "List all event categories in catalogue order",
+        "tags": [
+          "catalog"
+        ]
+      }
+    },
+    "/api/public/v1/categories/{slug}": {
+      "get": {
+        "operationId": "getCategory",
+        "parameters": [
+          {
+            "description": "Category identifier, for example weddings-and-reception",
+            "example": "weddings-and-reception",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDetail"
+                }
+              }
+            },
+            "description": "The category"
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "No category has this slug (code NOT_FOUND)"
+          }
+        },
+        "summary": "Get one category with its event types, subcategories and services",
+        "tags": [
+          "catalog"
+        ]
+      }
+    },
+    "/api/public/v1/commission": {
+      "get": {
+        "description": "For example at 5.00, a package booked for ₹20,000 earns the platform ₹1,000 and the vendor receives ₹19,000.",
+        "operationId": "getCommissionRate",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommissionRate"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "The commission the platform keeps from each booked package",
+        "tags": [
+          "commission"
+        ]
+      }
+    },
+    "/api/public/v1/csrf": {
+      "get": {
+        "description": "Send `token` in the header named `headerName` on every POST, PATCH and DELETE.",
+        "operationId": "getCsrfToken",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CsrfToken"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "CSRF token for this session",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/public/v1/listings": {
+      "get": {
+        "description": "With `venue`, results adapt to that venue (SR-1): its city, and services its owner does not allow are flagged and listed in `venueNotice` (SR-2).",
+        "operationId": "searchListings",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event category slug",
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Service code",
+            "in": "query",
+            "name": "service",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "VEG or NON_VEG",
+            "in": "query",
+            "name": "food",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Highest starting price in rupees",
+            "in": "query",
+            "name": "maxPrice",
+            "required": false,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Venue slug the customer has chosen",
+            "in": "query",
+            "name": "venue",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "relevance, price_asc or price_desc",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListingPage"
+                }
+              }
+            },
+            "description": "One page of listings (may be empty)"
+          },
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Invalid filter (VALIDATION_FAILED)"
+          }
+        },
+        "summary": "Service listings, filtered and paged (12 per page)",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    },
+    "/api/public/v1/locations": {
+      "get": {
+        "operationId": "listLocations",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Cities with published venues or services",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    },
+    "/api/public/v1/providers/{slug}": {
+      "get": {
+        "operationId": "getProvider",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderDetail"
+                }
+              }
+            },
+            "description": "The provider"
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "No approved provider with this slug (NOT_FOUND)"
+          }
+        },
+        "summary": "One vendor (provider) with its listings, packages and venues",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    },
+    "/api/public/v1/search": {
+      "get": {
+        "description": "Every word matches as a prefix and all words must match. At most 60 results.",
+        "operationId": "search",
+        "parameters": [
+          {
+            "description": "Search text, 2 to 100 characters",
+            "example": "mehandi",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "schema": {
+              "maxLength": 100,
+              "minLength": 2,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            },
+            "description": "Matches, grouped by type order (may be empty)"
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "`q` is missing (code REQUEST_MALFORMED)"
+          },
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "`q` is too short, too long or has no usable word (code VALIDATION_FAILED)"
+          }
+        },
+        "summary": "Keyword search across categories, event types, subcategories and services",
+        "tags": [
+          "discovery"
+        ]
+      }
+    },
+    "/api/public/v1/sessions": {
+      "post": {
+        "operationId": "signIn",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignedInAccount"
+                }
+              }
+            },
+            "description": "Signed in"
+          },
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Wrong or expired code (OTP_INVALID, OTP_EXPIRED)"
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Too many wrong codes (OTP_ATTEMPTS_EXCEEDED)"
+          }
+        },
+        "summary": "Sign in with the code; starts a customer session (cookie)",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/public/v1/sessions/current": {
+      "get": {
+        "description": "Always 200, so pages can check without an error. Signed-in calls use /api/customer/v1.",
+        "operationId": "getCurrentSession",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentSession"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Whether this browser is signed in",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/public/v1/sign-in/codes": {
+      "post": {
+        "operationId": "requestSignInCode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInCodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInCode"
+                }
+              }
+            },
+            "description": "Code sent (in development mode `devCode` holds it)"
+          },
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Invalid number or address (VALIDATION_FAILED)"
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Too many codes (OTP_RATE_LIMITED, OTP_RESEND_TOO_SOON)"
+          },
+          "503": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Channel not available (SIGN_IN_CHANNEL_UNAVAILABLE)"
+          }
+        },
+        "summary": "Send a one-time sign-in code to a mobile number or email address",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/public/v1/sign-in/options": {
+      "get": {
+        "description": "In development mode also returns the dummy test number and its fixed code.",
+        "operationId": "getSignInOptions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInOptions"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Which sign-in channels are available",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/public/v1/venue-types": {
+      "get": {
+        "operationId": "listVenueTypes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VenueType"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Venue types named in the catalogue",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    },
+    "/api/public/v1/venues": {
+      "get": {
+        "operationId": "searchVenues",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Venue type code",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Expected guests; venues too small are left out",
+            "in": "query",
+            "name": "guests",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Highest starting price in rupees",
+            "in": "query",
+            "name": "maxPrice",
+            "required": false,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Event category slug",
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "relevance, price_asc, price_desc or capacity",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VenuePage"
+                }
+              }
+            },
+            "description": "One page of venues (may be empty)"
+          },
+          "422": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "Invalid filter (VALIDATION_FAILED)"
+          }
+        },
+        "summary": "Venues, filtered and paged (12 per page)",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    },
+    "/api/public/v1/venues/{slug}": {
+      "get": {
+        "operationId": "getVenue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VenueDetail"
+                }
+              }
+            },
+            "description": "The venue"
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiProblem"
+                }
+              }
+            },
+            "description": "No published venue with this slug (NOT_FOUND)"
+          }
+        },
+        "summary": "One venue with its packages and what the owner allows (SR-2)",
+        "tags": [
+          "marketplace"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Clients set their own base URL",
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "description": "The platform commission",
+      "name": "commission"
+    },
+    {
+      "description": "Search across the catalogue",
+      "name": "discovery"
+    },
+    {
+      "description": "Venues, vendors (providers) and packages",
+      "name": "marketplace"
+    },
+    {
+      "description": "Sign-in",
+      "name": "identity"
+    },
+    {
+      "description": "Event categories, event types, subcategories and services",
+      "name": "catalog"
+    }
+  ]
+}

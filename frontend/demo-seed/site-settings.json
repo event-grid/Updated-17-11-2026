@@ -1,0 +1,23 @@
+{
+  "announcement": {
+    "enabled": true,
+    "text": "Welcome to EVENTGRID: one platform, every celebration."
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "youtube": "",
+    "x": ""
+  },
+  "contact": {
+    "email": "",
+    "phone": "",
+    "address": ""
+  },
+  "sections": {
+    "venues": true,
+    "services": true,
+    "vendors": true,
+    "howItWorks": true
+  }
+}

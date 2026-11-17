@@ -1,0 +1,46 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Node / Next.js
+node_modules/
+.next/
+frontend/*/out/
+*.tsbuildinfo
+coverage/
+playwright-report/
+test-results/
+
+# Java / Maven (keep the Maven wrapper)
+target/
+!.mvn/wrapper/maven-wrapper.properties
+*.class
+*.log
+HELP.md
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+
+# Editors and operating systems
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+# Copy of the backend jar used by scripts/development/run-backend.ps1
+backend/.run/
+
+# Build by-products written at the project root
+/build/
+
+# Prototype provider data shared by the portals (emails, password hashes); never commit
+frontend/.demo-data/
+
+# A saved copy of the whole database (made by scripts/database/export-database.ps1): contains customer phone numbers and emails
+evntgrid-database.sql
+*.dump

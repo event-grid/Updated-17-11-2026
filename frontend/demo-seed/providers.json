@@ -1,0 +1,378 @@
+{
+  "providers": [
+    {
+      "id": "fed5c07c-dc7b-40b0-a1e1-eb9371cc43f0",
+      "slug": "aarav-lens-studio",
+      "name": "Aarav Lens Studio",
+      "type": "INDIVIDUAL",
+      "email": "aarav.lens@example.com",
+      "phone": "9845012345",
+      "city": "Bengaluru",
+      "area": "Indiranagar",
+      "about": "Candid wedding and pre-wedding photographer with ten years of experience across Karnataka.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-10-08T14:31:10.092Z",
+      "passwordSalt": "dd271860d9adb2a885a876f26dc2b80d",
+      "passwordHash": "c947661baa706e8f35da3c37c68a5ee33d2c980420fbf1260cb04202fc0d7544c23d4c657c5dd3e4f8fab1016e9a68c0336e78400e85319021b9114c3843f567",
+      "services": [
+        {
+          "key": "weddings-and-reception:photography",
+          "categorySlug": "weddings-and-reception",
+          "categoryName": "Weddings and Reception",
+          "serviceCode": "photography",
+          "serviceName": "Photography",
+          "options": [
+            "pre-wedding",
+            "wedding"
+          ],
+          "attributes": {},
+          "startingPriceRupees": 35000,
+          "priceUnit": "FIXED",
+          "description": "Candid, traditional and cinematic coverage with an edited album and a highlight film.",
+          "packages": [
+            {
+              "name": "Essential",
+              "priceRupees": 35000,
+              "description": "One photographer, 6 hours, 300 edited photos"
+            },
+            {
+              "name": "Signature",
+              "priceRupees": 60000,
+              "description": "Two photographers, full day, album and highlight film"
+            },
+            {
+              "name": "Grand",
+              "priceRupees": 95000,
+              "description": "Two photographers, two days, drone, album and film"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "4f5f1c66-7677-4226-b146-5d2e2519c019",
+      "slug": "saffron-table-caterers",
+      "name": "Saffron Table Caterers",
+      "type": "COMPANY",
+      "email": "saffron.table@example.com",
+      "phone": "9886123456",
+      "city": "Mysuru",
+      "area": "Vijayanagar",
+      "about": "Family-run caterers for weddings and gatherings, from 100 to 2,000 guests.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-10-13T14:31:10.182Z",
+      "passwordSalt": "018f48e3c8f98e29e663924ce30a7069",
+      "passwordHash": "bf7af5a751cc345fc7477a6a64474526a8709fb5adfd872b1ee30df16c7d4954117673733a6ea3a87c84b65a18280cfac3dff0811ea6097a7410471fc6fa4472",
+      "services": [
+        {
+          "key": "weddings-and-reception:food",
+          "categorySlug": "weddings-and-reception",
+          "categoryName": "Weddings and Reception",
+          "serviceCode": "food",
+          "serviceName": "Food",
+          "options": [
+            "Veg",
+            "Non-Veg"
+          ],
+          "attributes": {},
+          "startingPriceRupees": 650,
+          "priceUnit": "PER_GUEST",
+          "description": "Full buffet or served meals, live counters, and chats and bakeries on request.",
+          "packages": [
+            {
+              "name": "Veg buffet",
+              "priceRupees": 650,
+              "description": "Starters, two curries, rice, breads and two desserts"
+            },
+            {
+              "name": "Non-veg buffet",
+              "priceRupees": 900,
+              "description": "Adds two non-veg dishes and a biryani counter"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "03af3196-6484-4f39-9492-1a6dfa634009",
+      "slug": "marigold-decor-co",
+      "name": "Marigold Decor Co",
+      "type": "COMPANY",
+      "email": "marigold.decor@example.com",
+      "phone": "9848098765",
+      "city": "Hyderabad",
+      "area": "Kondapur",
+      "about": "Stage, mandap and entrance decoration with fresh flowers and lighting.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-10-20T14:31:10.265Z",
+      "passwordSalt": "bfaad0f442ffb3de547a206f43f30b14",
+      "passwordHash": "a629a7173bba802fe84f452af64f7d1be41ae0a69dec880dfe6c3da5fa0e6c98ce0c8bf75914af262707621f2b297903f709b49cda3eda27d1d7359c9bbe18dd",
+      "services": [
+        {
+          "key": "weddings-and-reception:decoration",
+          "categorySlug": "weddings-and-reception",
+          "categoryName": "Weddings and Reception",
+          "serviceCode": "decoration",
+          "serviceName": "Decoration",
+          "options": [
+            "Choultry",
+            "Outdoor Wedding decos"
+          ],
+          "attributes": {},
+          "startingPriceRupees": 40000,
+          "priceUnit": "FIXED",
+          "description": "Floral stage, entrance arch, aisle and lighting, set up the evening before.",
+          "packages": [
+            {
+              "name": "Stage and entrance",
+              "priceRupees": 40000,
+              "description": "Floral stage and entrance arch"
+            },
+            {
+              "name": "Full venue",
+              "priceRupees": 90000,
+              "description": "Stage, entrance, aisle, tables and lighting"
+            }
+          ],
+          "completed": true
+        },
+        {
+          "key": "birthday-parties:decorators",
+          "categorySlug": "birthday-parties",
+          "categoryName": "Birthday Parties",
+          "serviceCode": "decorators",
+          "serviceName": "Decorators",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": 8000,
+          "priceUnit": "FIXED",
+          "description": "Balloon arches, themed backdrops and table styling for birthdays.",
+          "packages": [
+            {
+              "name": "Theme backdrop",
+              "priceRupees": 8000,
+              "description": "Backdrop, balloons and cake table"
+            },
+            {
+              "name": "Party package",
+              "priceRupees": 15000,
+              "description": "Backdrop, balloons, props and lights"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "247228e0-d462-473f-9d7d-f7a490f7bfb6",
+      "slug": "glow-makeup-studio",
+      "name": "Glow Makeup Studio",
+      "type": "INDIVIDUAL",
+      "email": "glow.makeup@example.com",
+      "phone": "9822011223",
+      "city": "Pune",
+      "area": "Koregaon Park",
+      "about": "Bridal and party makeup artist, with hair styling and mehandi on request.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-10-26T14:31:10.350Z",
+      "passwordSalt": "5ff6f70c7d501af5f776b1c156df3569",
+      "passwordHash": "fa8977ee839c75a5d982e71063bbf2ea2e779e1654a2c1c5294fd7f97befad9c8079eb6705455bdd800b9998594fb57a224bd9ed52e6bb7c2f98d0b222ab6acf",
+      "services": [
+        {
+          "key": "weddings-and-reception:makeup",
+          "categorySlug": "weddings-and-reception",
+          "categoryName": "Weddings and Reception",
+          "serviceCode": "makeup",
+          "serviceName": "Makeup",
+          "options": [
+            "makeup",
+            "hair stylist",
+            "mehandi artist"
+          ],
+          "attributes": {},
+          "startingPriceRupees": 12000,
+          "priceUnit": "FIXED",
+          "description": "HD bridal makeup, hair styling and saree draping, with a trial session.",
+          "packages": [
+            {
+              "name": "Bridal makeup",
+              "priceRupees": 12000,
+              "description": "Makeup and hair for the bride"
+            },
+            {
+              "name": "Bridal plus family",
+              "priceRupees": 22000,
+              "description": "Bride plus three family members"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "e40b331a-10ab-4650-b1af-7120e4e9aba6",
+      "slug": "beats-and-bash-dj",
+      "name": "Beats and Bash DJ",
+      "type": "INDIVIDUAL",
+      "email": "beats.bash@example.com",
+      "phone": "9444012345",
+      "city": "Chennai",
+      "area": "Adyar",
+      "about": "DJ, sound and lighting for sangeets, college nights and birthday parties.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-10-30T14:31:10.446Z",
+      "passwordSalt": "5d043de457593e59ec7337a6eef2ef58",
+      "passwordHash": "832d2492a350ad96dfaeedc96451fd93d55b86c5d2f8866329c8ca17cc776651b8e42102eb81fac5402cc78f7f25ff935904c0886b7cb4f50fffb0d7131481ed",
+      "services": [
+        {
+          "key": "weddings-and-reception:music-and-djs",
+          "categorySlug": "weddings-and-reception",
+          "categoryName": "Weddings and Reception",
+          "serviceCode": "music-and-djs",
+          "serviceName": "Music & Dj’S",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": 18000,
+          "priceUnit": "FIXED",
+          "description": "Four-hour DJ set with sound system and party lights.",
+          "packages": [
+            {
+              "name": "Evening set",
+              "priceRupees": 18000,
+              "description": "4 hours, sound and lights"
+            },
+            {
+              "name": "Sangeet night",
+              "priceRupees": 35000,
+              "description": "6 hours, LED wall and a live host"
+            }
+          ],
+          "completed": true
+        },
+        {
+          "key": "college-and-school-events:dance-and-djs",
+          "categorySlug": "college-and-school-events",
+          "categoryName": "College and School Events",
+          "serviceCode": "dance-and-djs",
+          "serviceName": "Dance & DJ’s",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": 25000,
+          "priceUnit": "FIXED",
+          "description": "DJ, sound and stage lighting for college fests and annual days.",
+          "packages": [
+            {
+              "name": "Fest night",
+              "priceRupees": 25000,
+              "description": "DJ, sound and lights for 4 hours"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "3da03baa-0126-4d66-93e3-584762836f39",
+      "slug": "little-joys-planners",
+      "name": "Little Joys Planners",
+      "type": "COMPANY",
+      "email": "little.joys@example.com",
+      "phone": "9895012345",
+      "city": "Kochi",
+      "area": "Edappally",
+      "about": "Baby shower and birthday planners: decor, food and return gifts in one package.",
+      "status": "APPROVED",
+      "createdBy": "ADMIN",
+      "createdAt": "2026-11-05T14:31:10.539Z",
+      "passwordSalt": "1fbb35b13cc22173cfbb68e30550485a",
+      "passwordHash": "e1b1d0d43731df5380c6818caf3de9c005d53346a960525842508d903642948efa891a1e6a239b035c09d22258458c96bebbcaad3f809bdc3e1d09917ec5f885",
+      "services": [
+        {
+          "key": "baby-shower:decorations",
+          "categorySlug": "baby-shower",
+          "categoryName": "Baby Shower",
+          "serviceCode": "decorations",
+          "serviceName": "Decorations",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": 15000,
+          "priceUnit": "FIXED",
+          "description": "Themed decoration with balloons, backdrop and seating.",
+          "packages": [
+            {
+              "name": "Classic",
+              "priceRupees": 15000,
+              "description": "Backdrop, balloons and seating"
+            },
+            {
+              "name": "Premium",
+              "priceRupees": 30000,
+              "description": "Adds flowers, props and a photo corner"
+            }
+          ],
+          "completed": true
+        },
+        {
+          "key": "baby-shower:return-gifts",
+          "categorySlug": "baby-shower",
+          "categoryName": "Baby Shower",
+          "serviceCode": "return-gifts",
+          "serviceName": "Return Gifts (optional)",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": 120,
+          "priceUnit": "PER_GUEST",
+          "description": "Return gifts packed and ready, in sets of your choice.",
+          "packages": [
+            {
+              "name": "Gift set",
+              "priceRupees": 120,
+              "description": "Per guest, wrapped"
+            }
+          ],
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "f810fb47-23bb-4111-9625-0142ad2e2d96",
+      "slug": "newbie-events",
+      "name": "Newbie Events",
+      "type": "INDIVIDUAL",
+      "email": "newbie.events@example.com",
+      "phone": "9811012345",
+      "city": "Jaipur",
+      "area": "",
+      "about": "",
+      "status": "PENDING",
+      "createdBy": "SELF",
+      "createdAt": "2026-11-16T14:31:10.632Z",
+      "passwordSalt": "c9e03f7a9f131e2571c5e2899df5f80f",
+      "passwordHash": "a289ab69bd7c0feef2a852f4fff5c7f8bd7beef8eb8576d3739bdab229cb5e167888b6a63bf014e614752f8d058045bb982902eb0f5eda34dab5b94cf5e9d1b9",
+      "services": [
+        {
+          "key": "meetups-and-gatherings:photo",
+          "categorySlug": "meetups-and-gatherings",
+          "categoryName": "Meetups and Gatherings",
+          "serviceCode": "photo",
+          "serviceName": "Photo",
+          "options": [],
+          "attributes": {},
+          "startingPriceRupees": null,
+          "priceUnit": "FIXED",
+          "description": "",
+          "packages": [],
+          "completed": false
+        }
+      ]
+    }
+  ],
+  "sessions": []
+}

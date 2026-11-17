@@ -1,0 +1,40 @@
+# Local development services only: PostgreSQL 18 (ADR-026) and Redis.
+# Credentials come from the root .env file.
+# Ports are bound to this computer only.
+#
+# Run from the project folder. --env-file is needed because the .env file is not next to this file.
+# Start:  docker compose --env-file .env -f infrastructure/docker/compose.yaml up -d
+# Stop:   docker compose --env-file .env -f infrastructure/docker/compose.yaml down
+# Reset the database (deletes all local data): add -v to the down command.
+
+name: evntgrid
+
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-evntgrid}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in the root .env file}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the root .env file}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:8
+    ports:
+      - "127.0.0.1:6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  postgres-data:

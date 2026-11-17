@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* provider-portal theme: the same plum, champagne and terracotta palette as the customer website. */
+@theme {
+  --color-plum: #220521;
+  --color-plum-700: #3a1238;
+  --color-plum-500: #5c2a59;
+  --color-champagne: #dfccac;
+  --color-champagne-200: #efe4d0;
+  --color-gold: #a8834f;
+  --color-terracotta: #d9735a;
+  --color-terracotta-600: #c25e46;
+  --color-cream: #faf6f1;
+  --color-sand: #f2ece4;
+  --color-ink: #231a22;
+  --color-ink-soft: #6c6168;
+  --color-line: #e6ddd3;
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --shadow-card: 0 14px 40px -18px rgb(34 5 33 / 0.28);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Phones: larger checkboxes and radio buttons, and rows that are easy to tap. */
+@media (max-width: 639px) {
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  label:has(> input[type="checkbox"]),
+  label:has(> input[type="radio"]) {
+    min-height: 2.5rem;
+    align-items: center;
+  }
+}

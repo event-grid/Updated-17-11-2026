@@ -1,0 +1,22 @@
+{
+  "name": "evntgrid-frontend",
+  "private": true,
+  "description": "npm workspace for the three frontend applications. It only shares the installed packages (one node_modules and one package-lock.json here); the applications still share no code.",
+  "workspaces": [
+    "customer-web",
+    "provider-portal",
+    "admin-portal"
+  ],
+  "scripts": {
+    "dev:customer": "npm run dev -w customer-web",
+    "dev:provider": "npm run dev -w provider-portal",
+    "dev:admin": "npm run dev -w admin-portal",
+    "lint:all": "npm run lint -w customer-web && npm run lint -w provider-portal && npm run lint -w admin-portal"
+  },
+  "overrides": {
+    "basic-ftp": "^6.2.6",
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.8"
+    }
+  }
+}
