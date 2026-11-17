@@ -45,7 +45,7 @@ ADMIN_PORTAL_PASSWORD=<the administrator's sign-in password>
 
 The last three are for the admin portal. `ADMIN_API_TOKEN` is the secret the admin portal's server sends to the backend's administration API; the backend refuses that API while the token is empty. Generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`. The frontends read only the settings they need from this file (they never see the database or payment secrets). To link the websites in production, also set `PARTNER_PORTAL_URL`, `ADMIN_PORTAL_URL`, `CUSTOMER_SITE_URL` and `SESSION_COOKIE_DOMAIN` (see `documentation\03-architecture\PORTALS_AND_ADMIN.md`); in development the links point to the local sites.
 
-Settings you leave out use the backend's built-in defaults (for example `BOOKING_ADVANCE_PERCENT=20` and `API_DOCS_ENABLED=true`). `.env` holds your secrets and is never committed.
+Settings you leave out use the backend's built-in defaults (for example `BOOKING_ADVANCE_PERCENT=20` and `API_DOCS_ENABLED=true`). A copy of `.env` with `CHANGE_ME` placeholders comes with the project: add your own passwords in place of each placeholder (or run `scripts\development\setup-demo.ps1`, which fills them in for you). `.env` holds your secrets once you have added them, so never push your own passwords to GitHub (see "Your own passwords in .env" in the last section).
 
 ### 4. Create the database (once)
 
@@ -109,7 +109,7 @@ These are listed in `.gitignore`. Never commit them; each one is downloaded or r
 
 | Not in Git | What it is | Recreated by |
 |---|---|---|
-| `.env` | Your local settings and secrets | Step 3 (create it yourself) |
+| your passwords in `.env` | Your local settings and secrets. The project ships a copy with `CHANGE_ME` placeholders only | Step 3 (add your own values) |
 | `frontend\node_modules` | Frontend libraries | Step 5, `npm install` |
 | `backend\target`, `backend\.run` | Compiled backend and its jar | Step 6, `run-backend.ps1` |
 | `.next`, `next-env.d.ts`, `*.tsbuildinfo` | Next.js and TypeScript build output | `npm run dev` / `npm run build` |
@@ -155,7 +155,7 @@ The folders `frontend\customer-web`, `frontend\provider-portal`, `frontend\admin
 
 - The three frontends are separate applications. They share no code package and never connect to the database.
 - There is one backend and one PostgreSQL database. Only the backend reads or writes it.
-- No secrets in the repository. Your settings live in `.env`, which is ignored by Git.
+- No real secrets in the repository. The `.env` that is committed has `CHANGE_ME` placeholders only; your own passwords stay on your computer (see "Your own passwords in .env" in the last section).
 
 ## How the repository was first created (history)
 
@@ -240,7 +240,7 @@ cd EventGrid
 powershell -ExecutionPolicy Bypass -File .\scripts\development\setup-demo.ps1
 ```
 
-It checks the tools, creates the `.env` settings file with generated secrets, creates the database (it asks **once** for the
+It checks the tools, fills in the `.env` settings file (the copy that comes with the project has `CHANGE_ME` placeholders, which it replaces with generated secrets; if you already typed your own passwords it leaves them), creates the database (it asks **once** for the
 `postgres` password from step 1), installs the website packages and copies in the sample vendors. At the end it prints
 the **admin login**. Write it down; it is also saved in the `.env` file (`ADMIN_PORTAL_EMAIL`, `ADMIN_PORTAL_PASSWORD`).
 
@@ -311,3 +311,25 @@ powershell -ExecutionPolicy Bypass -File .\scripts\database\import-database.ps1 
 
 The vendors, website settings and admin password are not in the database: the sample vendors and website settings come from
 `frontend\demo-seed`, and your own live ones are in `frontend\.demo-data` (copy that folder too if you want them).
+
+## Your own passwords in `.env`
+
+The `.env` file that comes with the project holds **placeholders only** (every value that starts with `CHANGE_ME`). It is
+there so you can see which settings exist. **Add your own passwords before you run the project**, in one of two ways:
+
+- **Automatic (easiest):** run `setup-demo.ps1`. It replaces each `CHANGE_ME` with a generated secret and prints the admin login.
+- **By hand:** open `.env` and type your own value in place of each `CHANGE_ME`:
+
+| Setting | What to put |
+|---|---|
+| `POSTGRES_PASSWORD` | Any password you choose. The setup creates the database login with it. |
+| `ADMIN_API_TOKEN` | A long random secret, at least 24 characters. |
+| `ADMIN_PORTAL_PASSWORD` | The password you will use to sign in to the admin portal (with `admin@evntgrid.local`). |
+
+**Do not push your real passwords to GitHub.** Once you have added them, Git would show `.env` as changed. If you plan to
+push your own changes, tell Git to ignore your copy once, so your passwords can never be committed by accident:
+
+```powershell
+git update-index --skip-worktree .env
+```
+

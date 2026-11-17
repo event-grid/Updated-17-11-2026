@@ -70,7 +70,39 @@ Ok "PostgreSQL client at $psql"
 # ---- 2. settings file -----------------------------------------------------------------------------------------------
 Step '2 of 5: settings file (.env)'
 if (Test-Path -LiteralPath $EnvPath) {
-    Ok ".env already exists, left as it is ($EnvPath)"
+    # The .env that comes with the project has CHANGE_ME placeholders. Fill those in with generated secrets; anything
+    # the person has already set to a real value is left exactly as it is.
+    $generators = @{
+        POSTGRES_PASSWORD     = { New-Secret 24 }
+        ADMIN_API_TOKEN       = { New-Secret 40 }
+        ADMIN_PORTAL_PASSWORD = { New-Secret 14 }
+    }
+    $filled = @{}
+    $updated = foreach ($line in Get-Content -LiteralPath $EnvPath) {
+        if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?i:CHANGE_ME)') {
+            $key = $Matches[1]
+            if ($generators.ContainsKey($key)) {
+                $value = & $generators[$key]
+                $filled[$key] = $value
+                "$key=$value"
+                continue
+            }
+            Write-Host "   note: $key still says CHANGE_ME in .env; edit it yourself if you need it." -ForegroundColor Yellow
+        }
+        $line
+    }
+    if ($filled.Count -gt 0) {
+        Set-Content -LiteralPath $EnvPath -Value $updated -Encoding ASCII
+        Ok "filled in $($filled.Count) CHANGE_ME placeholder(s) in $EnvPath with generated secrets"
+        if ($filled.ContainsKey('ADMIN_PORTAL_PASSWORD')) {
+            Write-Host ""
+            Write-Host "   ADMIN LOGIN (also saved in .env)" -ForegroundColor Yellow
+            Write-Host "   email:    admin@evntgrid.local" -ForegroundColor Yellow
+            Write-Host "   password: $($filled['ADMIN_PORTAL_PASSWORD'])" -ForegroundColor Yellow
+        }
+    } else {
+        Ok ".env already has your own values, left as it is ($EnvPath)"
+    }
 } else {
     $dbPassword = New-Secret 24
     $adminPassword = New-Secret 14

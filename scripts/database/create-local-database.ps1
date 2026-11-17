@@ -40,8 +40,8 @@ foreach ($line in Get-Content -LiteralPath $envFile) {
     if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$') { $settings[$Matches[1]] = $Matches[2].Trim() }
 }
 foreach ($key in 'POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD') {
-    if (-not $settings.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($settings[$key]) -or $settings[$key] -eq 'change_me') {
-        throw "$key is missing or still 'change_me' in .env."
+    if (-not $settings.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($settings[$key]) -or $settings[$key] -match '^(?i)change_me') {
+        throw "$key is missing or still a CHANGE_ME placeholder in .env. Add your own value, or run scripts\development\setup-demo.ps1 to fill it in."
     }
 }
 

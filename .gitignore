@@ -44,3 +44,6 @@ frontend/.demo-data/
 # A saved copy of the whole database (made by scripts/database/export-database.ps1): contains customer phone numbers and emails
 evntgrid-database.sql
 *.dump
+
+# NOTE: the committed .env is a copy with CHANGE_ME placeholders only (so people can see the settings).
+# Your own passwords never go to GitHub: run  git update-index --skip-worktree .env  after you add them.
