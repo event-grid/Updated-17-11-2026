@@ -45,5 +45,5 @@ frontend/.demo-data/
 evntgrid-database.sql
 *.dump
 
-# NOTE: the committed .env is a copy with CHANGE_ME placeholders only (so people can see the settings).
-# Your own passwords never go to GitHub: run  git update-index --skip-worktree .env  after you add them.
+# NOTE: .env is committed on purpose with demo passwords for a local test database. If you use your own passwords,
+# run  git update-index --skip-worktree .env  so they are never committed by accident.

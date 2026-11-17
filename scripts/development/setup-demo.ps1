@@ -101,7 +101,17 @@ if (Test-Path -LiteralPath $EnvPath) {
             Write-Host "   password: $($filled['ADMIN_PORTAL_PASSWORD'])" -ForegroundColor Yellow
         }
     } else {
-        Ok ".env already has your own values, left as it is ($EnvPath)"
+        Ok ".env already has real values, left as it is ($EnvPath)"
+        $kept = @{}
+        foreach ($line in Get-Content -LiteralPath $EnvPath) {
+            if ($line -match '^\s*(ADMIN_PORTAL_EMAIL|ADMIN_PORTAL_PASSWORD)\s*=\s*(.*?)\s*$') { $kept[$Matches[1]] = $Matches[2] }
+        }
+        if ($kept.ContainsKey('ADMIN_PORTAL_PASSWORD')) {
+            Write-Host ""
+            Write-Host "   ADMIN LOGIN (from .env)" -ForegroundColor Yellow
+            Write-Host "   email:    $($kept['ADMIN_PORTAL_EMAIL'])" -ForegroundColor Yellow
+            Write-Host "   password: $($kept['ADMIN_PORTAL_PASSWORD'])" -ForegroundColor Yellow
+        }
     }
 } else {
     $dbPassword = New-Secret 24
